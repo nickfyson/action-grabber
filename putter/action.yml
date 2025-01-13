@@ -25,5 +25,5 @@ runs:
         INPUT_DIRECTORY: ${{ inputs.input-directory }}
         GIST_URL: ${{ inputs.gist-url }}
       name: Run putter.sh
-      run: putter.sh $INPUT_DIRECTORY
+      run: putter.sh $GIST_URL $INPUT_DIRECTORY
       shell: bash
