@@ -1,0 +1,8 @@
+name: 'Hello World'
+description: 'Greet the worl!'
+runs:
+  using: "composite"
+  steps:
+    - name: Set Greeting
+      run: echo "Hello World!" >> $GITHUB_STEP_SUMMARY
+      shell: bash
