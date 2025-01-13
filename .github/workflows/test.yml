@@ -41,7 +41,7 @@ jobs:
         with:
           gist-url: ${{ steps.create-gist.outputs.gist-url }}
           gist-filename: ${{ steps.store-folder.outputs.gist-filename }}
-          input-directory: output_directory
+          output-directory: output_directory
 
       # - name: Retrieve file to new directory
       #   run: |
