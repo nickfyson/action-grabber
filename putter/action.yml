@@ -1,8 +1,29 @@
 name: 'Hello World'
-description: 'Greet the worl!'
+description: 'Greet the world!'
+inputs:
+  input-directory:
+    description: 'Which directory to store'
+    required: true
+  gist-url:
+    description: 'URL of the targeted gist'
+    required: true
+outputs:
+  gist-filename:
+    description: "Filename in the targeted gist"
+    value: ${{ steps.run-putter.outputs.gist-filename }}
 runs:
   using: "composite"
   steps:
-    - name: Set Greeting
-      run: echo "Hello World!" >> $GITHUB_STEP_SUMMARY
+    - name: Set GitHub Path
+      run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
+      shell: bash
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
+
+    - id: run-putter
+      env:
+        INPUT_DIRECTORY: ${{ inputs.input-directory }}
+        GIST_URL: ${{ inputs.gist-url }}
+      name: Run putter.sh
+      run: putter.sh $INPUT_DIRECTORY
       shell: bash
