@@ -10,9 +10,6 @@ GIST_URL=$1
 GIST_FILENAME=$2
 DIRECTORY=$3
 
-# ensure parent directory exists
-mkdir -p $(dirname $DIRECTORY)
-
 # generate path for temp file
 ZIPBASE64=$(mktemp)
 
@@ -30,5 +27,7 @@ TEMP_OUTPUT=$(mktemp -d)
 # extract the zip file
 unzip $ZIP -d $TEMP_OUTPUT
 
+# ensure parent directory exists
+mkdir -p $(dirname $DIRECTORY)
 # move the contents of the temp directory to the target directory
 mv $TEMP_OUTPUT/* $DIRECTORY
