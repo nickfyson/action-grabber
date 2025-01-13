@@ -42,16 +42,18 @@ jobs:
           gist-url: ${{ steps.create-gist.outputs.gist-url }}
           gist-filename: ${{ steps.store-folder.outputs.gist-filename }}
           output-directory: output_directory
+      
+      - name: Echo contents of input and output files
+        run: |
+          echo "Input file content:"
+          cat input_directory/testfile.txt
+          echo "Output file content:"
+          cat output_directory/testfile.txt
 
-      # - name: Retrieve file to new directory
-      #   run: |
-      #     mkdir retrieved_directory
-      #     gh gist clone ${{ steps.create_gist.outputs.html_url }} retrieved_directory
+      - name: Confirm content
+        run: diff input_directory/testfile.txt output_directory/testfile.txt
 
-      # - name: Confirm content
-      #   run: diff test_directory/testfile.txt retrieved_directory/testfile.txt
-
-      # - name: Clean up gist
-      #   run: gh gist delete ${{ steps.create_gist.outputs.id }}
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Clean up gist
+        run: gh gist delete ${{ steps.create-gist.outputs.gist-url }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

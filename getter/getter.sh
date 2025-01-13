@@ -31,7 +31,4 @@ TEMP_OUTPUT=$(mktemp -d)
 unzip $ZIP -d $TEMP_OUTPUT
 
 # move the contents of the temp directory to the target directory
-mv $TEMP_OUTPUT $DIRECTORY
-
-# list content of the directory recursively
-ls -R $DIRECTORY
+mv $TEMP_OUTPUT/* $DIRECTORY
