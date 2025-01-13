@@ -1,16 +1,15 @@
-name: 'Upload archive to gist'
-description: 'Store a zipper folder in a gist'
+name: 'Retrieve archive from gist'
+description: 'Retrieve archive from gist'
 inputs:
-  input-directory:
-    description: 'Which directory to store'
-    required: true
   gist-url:
     description: 'URL of the targeted gist'
     required: true
-outputs:
   gist-filename:
-    description: "Filename in the targeted gist"
-    value: ${{ steps.run-putter.outputs.gist-filename }}
+    description: 'Filename in gist of encoded archive'
+    required: true
+  output-directory:
+    description: 'Where to write retrieved folder'
+    required: true
 runs:
   using: "composite"
   steps:
@@ -22,8 +21,9 @@ runs:
 
     - id: run-putter
       env:
-        INPUT_DIRECTORY: ${{ inputs.input-directory }}
         GIST_URL: ${{ inputs.gist-url }}
+        GIST_FILENAME: ${{ inputs.gist-filename }}
+        INPUT_DIRECTORY: ${{ inputs.input-directory }}
       name: Run putter.sh
-      run: putter.sh $GIST_URL $INPUT_DIRECTORY
+      run: getter.sh $GIST_URL $GIST_FILENAME $INPUT_DIRECTORY
       shell: bash

@@ -29,11 +29,19 @@ jobs:
           echo $UNIQUE_STRING > input_directory/testfile.txt
           echo 'unique-string=$UNIQUE_STRING' >> $GITHUB_OUTPUT
 
-      - name: Store file in gist
+      - id: store-folder
+        name: Store folder in gist
         uses: ./putter
         with:
-          input-directory: input_directory
           gist-url: ${{ steps.create-gist.outputs.gist-url }}
+          input-directory: input_directory
+      
+      - name: Retrieve folder from gist
+        uses: ./getter
+        with:
+          gist-url: ${{ steps.create-gist.outputs.gist-url }}
+          gist-filename: ${{ steps.store-folder.outputs.gist-filename }}
+          input-directory: output_directory
 
       # - name: Retrieve file to new directory
       #   run: |
