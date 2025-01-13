@@ -19,8 +19,6 @@ jobs:
           GIST_URL=$(gh gist create -d "testing gist" -f dummy_file.txt dummy_file.txt)
           echo $GIST_URL
           echo "gist-url=$GIST_URL" >> $GITHUB_OUTPUT
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create directory with unique content
         run: |
@@ -55,5 +53,3 @@ jobs:
 
       - name: Clean up gist
         run: gh gist delete ${{ steps.create-gist.outputs.gist-url }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
