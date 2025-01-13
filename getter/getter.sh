@@ -24,7 +24,7 @@ ZIP=$(mktemp)
 echo "ZIP: $ZIP"
 
 # decode the base64 encoded file
-base64 -d $ZIPBASE64 > $ZIP
+cat $ZIPBASE64 | base64 -di > $ZIP
 
 # extract the zip file
 unzip $ZIP -d $DIRECTORY
