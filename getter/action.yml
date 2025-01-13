@@ -23,7 +23,7 @@ runs:
       env:
         GIST_URL: ${{ inputs.gist-url }}
         GIST_FILENAME: ${{ inputs.gist-filename }}
-        INPUT_DIRECTORY: ${{ inputs.input-directory }}
-      name: Run putter.sh
-      run: getter.sh $GIST_URL $GIST_FILENAME $INPUT_DIRECTORY
+        OUTPUT_DIRECTORY: ${{ inputs.output-directory }}
+      name: Run getter.sh
+      run: getter.sh $GIST_URL $GIST_FILENAME $OUTPUT_DIRECTORY
       shell: bash
